@@ -7,14 +7,13 @@ namespace GCB.Specification.Cases
     public class MultiThreadedWorkload
     {
         [Benchmark]
-        public void RunMultipleThreads()
+        public void AllocateObjectsInParallel()
         {
             Parallel.For(0, 1000, _ =>
             {
                 byte[] largeArray = new byte[short.MaxValue];
                 largeArray[0] = 42;
             });
-            GC.Collect();
         }
     }
 }

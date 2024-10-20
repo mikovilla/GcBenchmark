@@ -1,18 +1,18 @@
 ﻿using BenchmarkDotNet.Attributes;
-using GCB.Utility;
 
 namespace GCB.Specification.Cases
 {
     [MemoryDiagnoser]
-    public class MultiThreadedWorkload
+    public class DelayedMultiThreadedWorkload
     {
         [Benchmark]
-        public void RunMultipleThreads()
+        public void RunDelayedMultipleThreads()
         {
             Parallel.For(0, 1000, _ =>
             {
-                byte[] largeArray = new byte[short.MaxValue];
-                largeArray[0] = 42;
+                byte[] notSoLargeArray = new byte[short.MaxValue];
+                notSoLargeArray[0] = 87;
+                Thread.Sleep(10);
             });
             GC.Collect();
         }

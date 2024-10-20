@@ -3,7 +3,7 @@
 namespace GCB.Specification.Cases
 {
     [MemoryDiagnoser]
-    public class LOH
+    public class LargeObjectHeap
     {
         private List<byte[]>? largeObjects;
         int largeObjectSize = 88_000;

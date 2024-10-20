@@ -4,4 +4,4 @@ using GCB.Specification;
 using GCB.Specification.Cases;
 
 var config = Configuration.GetGCModeCombinationFromPlatform(Platform.X64);
-var summary = BenchmarkRunner.Run<Instantiation>(config);
+var summary = BenchmarkRunner.Run<LargeObjectHeap>(config);

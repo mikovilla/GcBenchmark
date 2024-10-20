@@ -25,6 +25,7 @@ namespace GCB.Specification.Cases
                 }
             });
             _temporaryObjects.Clear();
+            GC.Collect();
         }
     }
 }

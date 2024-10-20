@@ -14,6 +14,7 @@ namespace GCB.Specification.Cases
                 byte[] largeArray = new byte[short.MaxValue];
                 largeArray[0] = 42;
             });
+            GC.Collect();
         }
     }
 }

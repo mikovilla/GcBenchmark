@@ -6,26 +6,17 @@ namespace GCB.Specification.Cases
     public class DelayedMultiThreadedWorkload
     {
         private List<object> _temporaryObjects = new List<object>();
-        private object lockObject = new object();
 
         [Benchmark]
-        public void AllocateObjectsInParallel()
+        public void AllocateObjects()
         {
-            Parallel.For(0, 1000, i =>
+            for (int i = 0; i < 20_000; i++)
             {
-                var obj = new object();
-                lock (lockObject)
-                {
-                    _temporaryObjects.Add(obj);
-                }
+                _temporaryObjects.Add(new byte[short.MaxValue]);
+            }
 
-                if (i % 100 == 0)
-                {
-                    System.Threading.Thread.Sleep(10);
-                }
-            });
+            Thread.Sleep(2000);
             _temporaryObjects.Clear();
-            GC.Collect();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace GCB.Utility
+﻿namespace GCB.Utility.Extensions
 {
     public static class ObjectExtensions
     {

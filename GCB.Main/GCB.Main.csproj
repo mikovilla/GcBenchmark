@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GCB.Specification\GCB.Specification.csproj" />
+    <ProjectReference Include="..\GCB.Utility\GCB.Utility.csproj" />
   </ItemGroup>
 
 </Project>

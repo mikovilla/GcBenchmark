@@ -10,9 +10,9 @@ namespace GCB.Specification.Cases
         [Benchmark]
         public void AllocateMemory()
         {
-            for (int i = 0; i < 10_000; i++)
+            for (int i = 0; i < Int16.MaxValue; i++)
             {
-                _data.Add(new byte[1_000]); // Allocate 1 KB arrays
+                _data.Add(new byte[10]);
             }
         }
 
@@ -22,7 +22,7 @@ namespace GCB.Specification.Cases
             int sum = 0;
             for (int i = 0; i < _data.Count; i++)
             {
-                sum += _data[i][0]; // Simulate some processing
+                sum += _data[i][0];
             }
         }
 

@@ -1,0 +1,2 @@
+Intel(R) Core(TM) Ultra 7 165U (14 CPUs), ~2.1GHz
+64GB RAM DDR5 5600

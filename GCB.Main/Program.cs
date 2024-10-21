@@ -2,6 +2,7 @@
 using BenchmarkDotNet.Running;
 using GCB.Specification;
 using GCB.Specification.Cases;
+using GCB.Utility.Instrumentations;
 
 var config = Configuration.GetGCModeCombinationFromPlatform(Platform.X64);
-var summary = BenchmarkRunner.Run<DelayedMultiThreadedWorkload>(config);
+TimedAction.DisplayActionExecuteTime(() => BenchmarkRunner.Run<Instantiation>(config));

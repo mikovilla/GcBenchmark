@@ -5,4 +5,4 @@ using GCB.Specification.Cases;
 using GCB.Utility.Instrumentations;
 
 var config = Configuration.GetGCModeCombinationFromPlatform(Platform.X64);
-TimedAction.DisplayActionExecuteTime(() => BenchmarkRunner.Run<Instantiation>(config));
+TimedAction.DisplayActionExecuteTime(() => BenchmarkRunner.Run<LowMemoryAllocation>(config));

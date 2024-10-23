@@ -21,18 +21,18 @@ namespace GCB.Specification
 
             Job[] x64Jobs = new[]
             {
-                x64.WithGcMode(new GcMode { Concurrent = true, Server = true }),
-                x64.WithGcMode(new GcMode { Concurrent = true, Server = false }),
-                x64.WithGcMode(new GcMode { Concurrent = false, Server = true }),
-                x64.WithGcMode(new GcMode { Concurrent = false, Server = false })
+                x64.WithGcMode(new GcMode { Concurrent = true, Server = true }).WithId("Concurrent Server"),
+                x64.WithGcMode(new GcMode { Concurrent = true, Server = false }).WithId("Concurrent Workstation"),
+                x64.WithGcMode(new GcMode { Concurrent = false, Server = true }).WithId("Non-Concurrent Server"),
+                x64.WithGcMode(new GcMode { Concurrent = false, Server = false }).WithId("Non-Concurrent Workstation")
             };
 
             Job[] x86Jobs = new[]
             {
-                x86.WithGcMode(new GcMode { Concurrent = true, Server = true }),
-                x86.WithGcMode(new GcMode { Concurrent = true, Server = false }),
-                x86.WithGcMode(new GcMode { Concurrent = false, Server = true }),
-                x86.WithGcMode(new GcMode { Concurrent = false, Server = false })
+                x86.WithGcMode(new GcMode { Concurrent = true, Server = true }).WithId("Concurrent Server"),
+                x86.WithGcMode(new GcMode { Concurrent = true, Server = false }).WithId("Concurrent Workstation"),
+                x86.WithGcMode(new GcMode { Concurrent = false, Server = true }).WithId("Non-Concurrent Server"),
+                x86.WithGcMode(new GcMode { Concurrent = false, Server = false }).WithId("Non-Concurrent Workstation")
             };
 
             Job[] anyCpuJobs = x64Jobs.Concat(x86Jobs).ToArray();

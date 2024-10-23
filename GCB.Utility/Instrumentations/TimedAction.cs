@@ -11,7 +11,7 @@ namespace GCB.Utility.Instrumentations
             Stopwatch stopwatch = Stopwatch.StartNew();
             action.Invoke();
             stopwatch.Stop();
-            $"Action Execute Time: {stopwatch.ElapsedMilliseconds} ms".DumpLine();
+            $"Action Execute Time: {stopwatch.ElapsedMilliseconds.MsToReadableTime()}".DumpLine();
             "Ending Benchmark".DumpLine();
         }
     }

@@ -15,7 +15,7 @@ namespace GCB.Specification.Cases
                 _temporaryObjects.Add(new byte[short.MaxValue]);
             }
 
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             _temporaryObjects.Clear();
         }
     }

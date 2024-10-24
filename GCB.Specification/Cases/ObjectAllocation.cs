@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Attributes;
-using GCB.Utility;
 using GCB.Utility.Extensions;
 using GCB.Utility.Memory;
 
@@ -16,13 +15,14 @@ namespace GCB.Specification.Cases
             for (int i = 0; i < short.MaxValue; i++)
             {
                 _data.Add(new byte[1_024]);
+                i.PauseAfter(nthOperation: 16384, pauseTimeInMilliseconds: ((long)1).NsToMs());
             }
         }
 
-        [Benchmark]
+        //[Benchmark]
         public void AllocateObjectsInParallel()
         {
-            Parallel.For(0, short.MaxValue, _ =>
+            Parallel.For(0, short.MaxValue, i =>
             {
                 _data.Add(new byte[1_024]);
             });

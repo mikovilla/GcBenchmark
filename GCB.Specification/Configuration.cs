@@ -9,12 +9,17 @@ namespace GCB.Specification
 {
     public class Configuration
     {
-        public static ManualConfig GetGCModeCombinationFromPlatform(Platform platform)
+        public static ManualConfig GetGCModeCombinationFromPlatform(Platform platform, bool lowIteration = false)
         {
             var anyCpu = Job.Default
             .WithRuntime(CoreRuntime.Core80)
             .WithToolchain(CsProjCoreToolchain.NetCoreApp80)
             .WithStrategy(RunStrategy.Throughput);
+
+            if (lowIteration)
+                anyCpu = anyCpu
+                    .WithWarmupCount(5)
+                    .WithIterationCount(25);
 
             var x64 = anyCpu.WithPlatform(Platform.X64);
             var x86 = anyCpu.WithPlatform(Platform.X86);

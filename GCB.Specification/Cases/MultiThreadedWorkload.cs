@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using GCB.Utility.Memory;
 
 namespace GCB.Specification.Cases
 {
@@ -16,6 +17,7 @@ namespace GCB.Specification.Cases
                 {
                     _data.Add(new byte[1_024]);
                 }
+                i.PauseAfter(nthOperation: 4096, pauseTimeInMilliseconds: 1);
             });
         }
 
@@ -29,6 +31,7 @@ namespace GCB.Specification.Cases
                 {
                     sum += _data[i][0];
                 }
+                i.PauseAfter(nthOperation: 4096, pauseTimeInMilliseconds: 1);
             });
         }
 

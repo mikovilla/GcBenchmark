@@ -18,8 +18,8 @@ namespace GCB.Specification
 
             if (lowIteration)
                 anyCpu = anyCpu
-                    .WithWarmupCount(5)
-                    .WithIterationCount(25);
+                    .WithWarmupCount(10)
+                    .WithIterationCount(100);
 
             var x64 = anyCpu.WithPlatform(Platform.X64);
             var x86 = anyCpu.WithPlatform(Platform.X86);

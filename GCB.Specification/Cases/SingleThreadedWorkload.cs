@@ -1,16 +1,14 @@
 ﻿using BenchmarkDotNet.Attributes;
-using GCB.Utility.Extensions;
-using GCB.Utility.Memory;
 
 namespace GCB.Specification.Cases
 {
     [MemoryDiagnoser]
-    public class ProcessData
+    public class SingleThreadedWorkload
     {
         private List<byte[]> _data = new List<byte[]>();
 
-        [GlobalSetup]
-        public void Setup()
+        [Benchmark]
+        public void AllocateObjects()
         {
             for (int i = 0; i < short.MaxValue; i++)
             {
@@ -18,29 +16,19 @@ namespace GCB.Specification.Cases
             }
         }
 
-
         [Benchmark]
-        public void ProcessDataInSingleThread()
+        public void ProcessData()
         {
             int sum = 0;
             for (int i = 0; i < _data.Count; i++)
             {
                 sum += _data[i][0];
             }
-            _data.Clear();
         }
 
-        [Benchmark]
-        public void ProcessDataInParallel()
+        [GlobalCleanup]
+        public void Cleanup()
         {
-            int sum = 0;
-            Parallel.For(0, _data.Count, i =>
-            {
-                lock (_data) 
-                {
-                    sum += _data[i][0];
-                }
-            });
             _data.Clear();
         }
     }

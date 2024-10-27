@@ -16,8 +16,8 @@ namespace GCB.Specification.Cases
                 lock (_data)
                 {
                     _data.Add(new byte[1_024]);
+                    i.PauseAfter(nthOperation: 4096, pauseTimeInMilliseconds: 1);
                 }
-                i.PauseAfter(nthOperation: 4096, pauseTimeInMilliseconds: 1);
             });
         }
 
@@ -30,14 +30,15 @@ namespace GCB.Specification.Cases
                 lock (_data)
                 {
                     sum += _data[i][0];
+                    i.PauseAfter(nthOperation: 4096, pauseTimeInMilliseconds: 1);
                 }
-                i.PauseAfter(nthOperation: 4096, pauseTimeInMilliseconds: 1);
             });
         }
 
         [GlobalCleanup]
         public void Cleanup()
         {
+            Pressure.DecreaseByThreadSleep(1);
             _data.Clear();
         }
     }

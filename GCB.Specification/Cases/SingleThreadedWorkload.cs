@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using GCB.Utility.Constants;
 using GCB.Utility.Memory;
 
 namespace GCB.Specification.Cases
@@ -11,10 +12,10 @@ namespace GCB.Specification.Cases
         [Benchmark]
         public void AllocateObjects()
         {
-            for (int i = 0; i < short.MaxValue; i++)
+            for (int i = 0; i < ConstantConfig.NumberOfLoops; i++)
             {
                 _data.Add(new byte[1_024]);
-                i.PauseAfter(nthOperation: 4096, pauseTimeInMilliseconds: 1);
+                i.PauseAfter(nthOperation: ConstantConfig.PauseAfterNthOperation, pauseTimeInMilliseconds: ConstantConfig.PauseTime);
             }
         }
 
@@ -25,7 +26,7 @@ namespace GCB.Specification.Cases
             for (int i = 0; i < _data.Count; i++)
             {
                 sum += _data[i][0];
-                i.PauseAfter(nthOperation: 4096, pauseTimeInMilliseconds: 1);
+                i.PauseAfter(nthOperation: ConstantConfig.PauseAfterNthOperation, pauseTimeInMilliseconds: ConstantConfig.PauseTime);
             }
         }
 

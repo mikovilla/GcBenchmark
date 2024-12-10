@@ -2,7 +2,15 @@
 using BenchmarkDotNet.Running;
 using GCB.Specification;
 using GCB.Specification.Cases;
+using GCB.Specification.Domain;
 using GCB.Utility.Instrumentations;
 
-var config = Configuration.GetGCModeCombinationFromPlatform(Platform.X64, lowIteration: true);
-TimedAction.DisplayActionExecuteTime(() => BenchmarkRunner.Run<MultiThreadedWorkload>(config));
+
+var config = Configuration.GetGCModeCombinationFromPlatform(new ConfigurationItem { 
+    Platform = Platform.X64,
+    Affinity = 1, 
+    WarmUpCount = 2, 
+    IterationCount = 10 
+});
+
+TimedAction.DisplayActionExecuteTime(() => BenchmarkRunner.Run<SingleThreadedWorkload>(config));

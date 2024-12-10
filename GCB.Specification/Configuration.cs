@@ -4,22 +4,23 @@ using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Toolchains.CsProj;
+using GCB.Specification.Domain;
 
 namespace GCB.Specification
 {
     public class Configuration
     {
-        public static ManualConfig GetGCModeCombinationFromPlatform(Platform platform, bool lowIteration = false)
+        public static ManualConfig GetGCModeCombinationFromPlatform(ConfigurationItem config)
         {
             var anyCpu = Job.Default
             .WithRuntime(CoreRuntime.Core80)
             .WithToolchain(CsProjCoreToolchain.NetCoreApp80)
             .WithStrategy(RunStrategy.Throughput);
 
-            if (lowIteration)
-                anyCpu = anyCpu
-                    .WithWarmupCount(10)
-                    .WithIterationCount(100);
+            anyCpu = anyCpu
+                    .WithAffinity(config.Affinity)
+                    .WithWarmupCount(config.WarmUpCount)
+                    .WithIterationCount(config.IterationCount);
 
             var x64 = anyCpu.WithPlatform(Platform.X64);
             var x86 = anyCpu.WithPlatform(Platform.X86);
@@ -42,7 +43,7 @@ namespace GCB.Specification
 
             Job[] anyCpuJobs = x64Jobs.Concat(x86Jobs).ToArray();
 
-            Job[] jobs = platform switch
+            Job[] jobs = config.Platform switch
             {
                 Platform.X86 => x86Jobs,
                 Platform.X64 => x64Jobs,
